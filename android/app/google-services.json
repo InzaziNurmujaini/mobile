@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "130831722796",
+    "project_id": "modul3-64c3b",
+    "storage_bucket": "modul3-64c3b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:130831722796:android:b0ce746e2cb710119fe489",
+        "android_client_info": {
+          "package_name": "com.coba3"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqzO3JC7m67U2_Sv0Ehlel1DVb2V0qbEY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:130831722796:android:452bbbc38b1ef7cf9fe489",
+        "android_client_info": {
+          "package_name": "com.modul3"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqzO3JC7m67U2_Sv0Ehlel1DVb2V0qbEY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
