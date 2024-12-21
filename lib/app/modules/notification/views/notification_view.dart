@@ -5,6 +5,8 @@ import '../controllers/notification_controller.dart';
 class NotificationPage extends StatelessWidget {
   final NotificationController_controller = Get.put(NotificationController());
 
+       NotificationPage({super.key}); 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -24,6 +24,7 @@ allprojects {
 
 android {
     namespace = "com.example.coba3"
+    compileSdkVersion 34 
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 

@@ -1,10 +1,10 @@
 class ProductModel {
-  final String id;
-  final String name;
-  final int price;
-  final String description;
-  final String imagePath;
-  String? cartId; // Tambahkan properti ini
+  final String id; // ID produk, unik
+  final String name; // Nama produk
+  final int price; // Harga produk
+  final String description; // Deskripsi produk
+  final String imagePath; // Path ke gambar produk
+  String? cartId; // ID produk di cart (Firestore document ID), nullable
 
   ProductModel({
     required this.id,
@@ -15,6 +15,7 @@ class ProductModel {
     this.cartId,
   });
 
+  /// Konversi objek ke format JSON untuk Firestore
   Map<String, dynamic> toJson() {
     return {
       'id': id,
@@ -25,15 +26,15 @@ class ProductModel {
     };
   }
 
-  // Tambahkan metode fromJson untuk inisialisasi dari Firestore
-  static ProductModel fromJson(Map<String, dynamic> json, String docId) {
+  /// Konversi dari Firestore JSON ke objek ProductModel
+  factory ProductModel.fromJson(Map<String, dynamic> json, String? docId) {
     return ProductModel(
-      id: json['id'],
-      name: json['name'],
-      price: json['price'],
-      description: json['description'],
-      imagePath: json['imagePath'],
-      cartId: docId, // Simpan Firestore document ID sebagai cartId
+      id: json['id'] ?? '', // Default ke string kosong jika null
+      name: json['name'] ?? 'Unknown', // Default ke 'Unknown' jika null
+      price: json['price'] ?? 0, // Default ke 0 jika null
+      description: json['description'] ?? 'No description', // Default deskripsi
+      imagePath: json['imagePath'] ?? 'assets/default.png', // Default image path
+      cartId: docId, // Simpan Firestore document ID jika ada
     );
   }
 }

@@ -12,6 +12,8 @@ void main() {
 class ProductView extends StatelessWidget {
   final ProductController productController = Get.put(ProductController());
 
+ ProductView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -24,7 +26,7 @@ class ProductView extends StatelessWidget {
 class HomeScreen extends StatelessWidget {
   final ProductController productController;
 
-  HomeScreen({required this.productController});
+  const HomeScreen({super.key, required this.productController});
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +34,10 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Column(
           children: [
-            Text("Delivery address", style: TextStyle(color: Colors.black, fontSize: 14)),
-            Text("Salatiga City, Central Java", style: TextStyle(color: Colors.black, fontSize: 18)),
+            Text("Delivery address",
+                style: TextStyle(color: Colors.black, fontSize: 14)),
+            Text("Salatiga City, Central Java",
+                style: TextStyle(color: Colors.black, fontSize: 18)),
           ],
         ),
         backgroundColor: Colors.white,
@@ -57,14 +61,48 @@ class HomeScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Search Bar
-            TextField(
-              decoration: InputDecoration(
-                hintText: "Search here ...",
-                prefixIcon: Icon(Icons.search),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
+            Row(
+              children: [
+                // Search Bar
+                Expanded(
+                  child: Obx(
+                    () => TextField(
+                      controller: TextEditingController(
+                        text: productController.text.value,
+                      ),
+                      decoration: InputDecoration(
+                        hintText: "Search here ...",
+                        prefixIcon: Icon(Icons.search),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      onChanged: (value) =>
+                          productController.text.value = value,
+                    ),
+                  ),
                 ),
-              ),
+
+                SizedBox(width: 10), // Space between search bar and button
+
+                // Mic Button
+                Container(
+                  padding: EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (productController.isListening.value) {
+                        productController.stopListening();
+                      } else {
+                        productController.startListening();
+                      }
+                    },
+                    child: Icon(Icons.mic),
+                  ),
+                ),
+              ],
             ),
             SizedBox(height: 20),
             // Category Section
@@ -82,7 +120,9 @@ class HomeScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Recent product", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                Text("Recent product",
+                    style:
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                 TextButton.icon(
                   onPressed: () {},
                   icon: Icon(Icons.filter_list, color: Colors.white),
@@ -122,7 +162,8 @@ class HomeScreen extends StatelessWidget {
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
           BottomNavigationBarItem(icon: Icon(Icons.history), label: "History"),
-          BottomNavigationBarItem(icon: Icon(Icons.account_circle), label: "Account"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.account_circle), label: "Account"),
         ],
       ),
     );
@@ -133,7 +174,7 @@ class CategoryItem extends StatelessWidget {
   final IconData icon;
   final String label;
 
-  CategoryItem({required this.icon, required this.label});
+  const CategoryItem({super.key, required this.icon, required this.label});
 
   @override
   Widget build(BuildContext context) {
@@ -154,7 +195,7 @@ class CategoryItem extends StatelessWidget {
 class ProductCard extends StatelessWidget {
   final ProductModel product;
 
-  ProductCard({required this.product});
+  const ProductCard({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -173,12 +214,16 @@ class ProductCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(product.name, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                Text("Rp. ${product.price} /24 Jam", style: TextStyle(fontSize: 14, color: Colors.orange)),
+                Text(product.name,
+                    style:
+                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                Text("Rp. ${product.price} /24 Jam",
+                    style: TextStyle(fontSize: 14, color: Colors.orange)),
                 SizedBox(height: 5),
                 ElevatedButton(
                   onPressed: () {
-                    productController.addToCart(product); // Call the controller to add to cart
+                    productController.addToCart(
+                        product); // Call the controller to add to cart
                     Get.to(CartView()); // Navigate to CartPage
                   },
                   style: ElevatedButton.styleFrom(

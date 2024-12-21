@@ -10,10 +10,14 @@
 analyzer:
   errors:
     unused_import: ignore
-    non_constant_identifier_names: ignore
+    non_constant_identifier_names: ignore ignore ignore
     depend_on_referenced_packages: ignore
     unused_field: ignore
     unused_local_variable: ignore
+    unused_element: ignore
+    annotate_overrides: ignore ignore
+    avoid_print: ignore
+    prefer_const_constructors_in_immutables: ignore
 include: package:flutter_lints/flutter.yaml
 
 linter:

@@ -1,3 +1,4 @@
+import 'package:codelab3/depedency_injection.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,7 +17,7 @@ void main() async {
     //webRecaptchaSiteKey: 'your_site_key', // Ganti dengan site key Anda
     //androidProvider: AndroidProvider.playIntegrity,
   //);
-
+  DependencyInjection.init();
   runApp(const MyApp());
 }
 
@@ -28,6 +29,7 @@ Future<void> main() async {
   Get.put(NotificationController()); // Inisialisasi NotificationController
   await FirebaseAppCheck.instance.activate();
   runApp(MyApp());
+ 
 }
   @override
   Widget build(BuildContext context) {
@@ -37,5 +39,7 @@ Future<void> main() async {
       getPages: AppPages.routes, // Rute aplikasi
       debugShowCheckedModeBanner: false,
     );
+
   }
+  
 }
